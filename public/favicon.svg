@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- UniPrism mark: one beam of light, split by a prism. Mirrors src/landing/components/Logo.tsx -->
+  <clipPath id="c"><rect width="32" height="32" rx="9"/></clipPath>
+  <g clip-path="url(#c)">
+    <rect width="32" height="32" fill="#1A1A1A"/>
+    <path d="M1 17.6L11.2 15" stroke="#FAF7F2" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M20.8 15L33 11" stroke="#C65D3B" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M20.8 15L33 17.4" stroke="#E8A33D" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M16 6.5l9.5 17h-19z" fill="#FAF7F2" fill-opacity="0.1" stroke="#FAF7F2" stroke-width="1.8" stroke-linejoin="round"/>
+  </g>
+</svg>

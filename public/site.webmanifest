@@ -1,0 +1,13 @@
+{
+  "name": "UniPrism",
+  "short_name": "UniPrism",
+  "description": "Your gateway to top universities: scholarships, AI essay audit and match rates in Telegram.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#FAF7F2",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}

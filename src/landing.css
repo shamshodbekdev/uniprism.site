@@ -1,0 +1,169 @@
+/*
+ * Global styles for the landing page: Tailwind layers plus a few hand-written
+ * effects (grain, grids, spotlight, pulse, marquee). The page uses a single
+ * fixed light palette (tailwind `brand.*`).
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    @apply bg-brand-cream font-sans text-brand-ink antialiased;
+    overflow-x: clip;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Subtle film grain over the whole page: keeps large cream areas from
+     looking flat. Fixed + pointer-events none, so it costs nothing. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    @apply bg-brand-terracotta/20 text-brand-ink;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* Fine line grids used behind the hero and dark panels. */
+  .landing-grid {
+    background-image:
+      linear-gradient(to right, rgba(26, 26, 26, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(26, 26, 26, 0.055) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .landing-grid-dark {
+    background-image:
+      linear-gradient(to right, rgba(250, 247, 242, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(250, 247, 242, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Cursor-following glow on feature cards (--x/--y set from JS). */
+  .landing-spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    background: radial-gradient(
+      420px circle at var(--x, 50%) var(--y, 0%),
+      rgba(232, 163, 61, 0.16),
+      transparent 45%
+    );
+  }
+  .landing-spotlight:hover::before {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  /* CTA pulse: soft rings expanding from the button edge. An outward
+     box-shadow (not a scale) keeps the ring the same thickness on narrow
+     and full-width buttons. */
+  .landing-pulse {
+    animation: landing-pulse 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+  .landing-pulse-delay {
+    animation-delay: 1.3s;
+  }
+  @keyframes landing-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(198, 93, 59, 0.45);
+    }
+    100% {
+      box-shadow: 0 0 0 18px rgba(198, 93, 59, 0);
+    }
+  }
+
+  .landing-float {
+    animation: landing-float 5s ease-in-out infinite;
+  }
+  @keyframes landing-float {
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .landing-marquee {
+    animation: landing-marquee 45s linear infinite;
+  }
+  .landing-marquee:hover {
+    animation-play-state: paused;
+  }
+  @keyframes landing-marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .landing-travel-x {
+    animation: landing-travel-x 3.2s ease-in-out 2s infinite;
+    opacity: 0;
+  }
+  @keyframes landing-travel-x {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+    15%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+  .landing-travel-y {
+    animation: landing-travel-y 3.2s ease-in-out 2s infinite;
+    opacity: 0;
+  }
+  @keyframes landing-travel-y {
+    0% {
+      top: 0;
+      opacity: 0;
+    }
+    15%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-pulse,
+    .landing-float,
+    .landing-marquee,
+    .landing-travel-x,
+    .landing-travel-y {
+      animation: none;
+    }
+  }
+}

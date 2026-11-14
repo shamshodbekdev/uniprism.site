@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!--
+      Telegram guard — must run before anything else.
+      Telegram opens Mini Apps with launch data in the URL hash
+      (#tgWebAppData=…). Older bot buttons and the BotFather menu button may
+      still point at the site root, so forward those launches to the Mini App
+      at /app/, keeping the query string (?ref=…) and hash intact.
+    -->
+    <script>
+      (function () {
+        if (/tgWebApp(Data|Platform|Version)=/.test(location.hash)) {
+          location.replace("/app/" + location.search + location.hash);
+        }
+      })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FAF7F2" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- Primary SEO -->
+    <title>UniPrism — Your Gateway to Top Universities</title>
+    <meta
+      name="description"
+      content="UniPrism is a free Telegram app for students applying abroad: explore 1,002 QS-ranked universities, find scholarships, get AI feedback on your essays and check your admission chances."
+    />
+    <meta
+      name="keywords"
+      content="study abroad, university admissions, scholarships, college essay feedback, Common App, QS ranking, Telegram app, UniPrism"
+    />
+    <link rel="canonical" href="https://uniprism.site/" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UniPrism" />
+    <meta property="og:url" content="https://uniprism.site/" />
+    <meta property="og:title" content="UniPrism — Your Gateway to Top Universities" />
+    <meta
+      property="og:description"
+      content="Scholarships, AI essay audits, match rates and study rooms for students applying abroad, all inside Telegram."
+    />
+    <meta property="og:image" content="https://uniprism.site/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="UniPrism — Your Gateway to Top Universities" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="UniPrism — Your Gateway to Top Universities" />
+    <meta
+      name="twitter:description"
+      content="Scholarships, AI essay audits, match rates and study rooms for students applying abroad, all inside Telegram."
+    />
+    <meta name="twitter:image" content="https://uniprism.site/og-image.png" />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts: Sora (display) + Inter (text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Hero phone screenshot (LCP image) -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/landing/screens/home-480.webp"
+      imagesrcset="/landing/screens/home-480.webp 480w, /landing/screens/home.webp 780w"
+      imagesizes="(min-width: 1024px) 320px, 280px"
+      fetchpriority="high"
+    />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "UniPrism",
+        "url": "https://uniprism.site/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Telegram",
+        "description": "University admissions companion: scholarships, AI essay audit, match rate, study rooms and flash quizzes.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      UniPrism helps students get into top universities. Open the app in Telegram:
+      <a href="https://t.me/UniPrismBot">t.me/UniPrismBot</a>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
